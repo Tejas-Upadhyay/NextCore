@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NextCore Tech Solutions | Modern Support</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        .glass {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+        }
+
+        .hero-gradient {
+            background: radial-gradient(circle at top left, rgba(59, 130, 246, 0.1), transparent 40%), radial-gradient(circle at bottom right, rgba(168, 85, 247, 0.1), transparent 40%);
+        }
+    </style>
+</head>
+
+<body class="bg-white text-slate-900 selection:bg-blue-100 selection:text-blue-900">
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+
+        function App() {
+            const [isMenuOpen, setIsMenuOpen] = useState(false);
+            const [formSubmitted, setFormSubmitted] = useState(false);
+
+            // Trigger Lucide icon replacement after React renders
+            useEffect(() => {
+                if (window.lucide) {
+                    window.lucide.createIcons();
+                }
+            }, [isMenuOpen, formSubmitted]);
+
+            const services = [
+                {
+                    title: "Computer Setup & Repair",
+                    icon: "laptop",
+                    color: "text-blue-600",
+                    description: "Device setup, troubleshooting, upgrades, and performance optimization for home and office environments."
+                },
+                {
+                    title: "Home Theater & Audio",
+                    icon: "tv",
+                    color: "text-violet-600",
+                    description: "TV mounting, soundbar calibration, and streaming device integration for high-performance entertainment systems."
+                },
+                {
+                    title: "Wi-Fi & Network Help",
+                    icon: "wifi",
+                    color: "text-blue-600",
+                    description: "Router setup, wireless coverage improvement, and device connectivity to eliminate dead zones forever."
+                },
+                {
+                    title: "Smart Home Assistance",
+                    icon: "cpu",
+                    color: "text-violet-600",
+                    description: "Professional setup for voice assistants, smart cameras, doorbells, and connected home ecosystems."
+                },
+                {
+                    title: "Small Business Support",
+                    icon: "briefcase",
+                    color: "text-blue-600",
+                    description: "Workstation setup, basic network assistance, printer troubleshooting, and ongoing audiovisual tech help."
+                },
+                {
+                    title: "On-Site Technical Service",
+                    icon: "map-pin",
+                    color: "text-violet-600",
+                    description: "Convenient in-home or on-site support, delivering expert help without the hassle of transporting equipment."
+                }
+            ];
+
+            return (
+                <div className="min-h-screen">
+                    {/* Navigation */}
+                    <nav className="fixed top-0 z-[60] w-full border-b border-slate-200/60 glass">
+                        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-8">
+                            <div className="flex flex-col">
+                                <div className="text-2xl font-bold tracking-tight flex items-center gap-1">
+                                    <span className="text-blue-700">Next</span>
+                                    <span className="bg-gradient-to-r from-blue-600 to-violet-700 bg-clip-text text-transparent">Core</span>
+                                </div>
+                                <div className="text-[10px] font-bold uppercase tracking-[0.3em] text-slate-400">Tech Solutions LLC</div>
+                            </div>
+
+                            <div className="hidden gap-8 text-sm font-bold md:flex text-slate-600">
+                                {['Home', 'About', 'Services', 'Contact'].map((item) => (
+                                    <a key={item} href={`#${item.toLowerCase()}`} className="transition hover:text-blue-700">{item}</a>
+                                ))}
+                            </div>
+
+                            <div className="flex items-center gap-4">
+                                <a href="#contact" className="hidden sm:block rounded-full bg-slate-900 px-5 py-2.5 text-sm font-bold text-white transition hover:bg-blue-700 hover:shadow-lg hover:shadow-blue-100">
+                                    Request Service
+                                </a>
+                                <button className="md:hidden p-2 text-slate-600" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+                                    <i data-lucide={isMenuOpen ? "x" : "menu"}></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        {/* Mobile Menu */}
+                        {isMenuOpen && (
+                            <div className="md:hidden bg-white border-b border-slate-100 p-6 space-y-4 font-bold">
+                                {['Home', 'About', 'Services', 'Contact'].map((item) => (
+                                    <a key={item} href={`#${item.toLowerCase()}`} onClick={() => setIsMenuOpen(false)} className="block text-lg">{item}</a>
+                                ))}
+                            </div>
+                        )}
+                    </nav>
+
+                    <main className="pt-20">
+                        {/* Hero Section */}
+                        <section id="home" className="relative hero-gradient px-6 py-24 lg:py-32 overflow-hidden">
+                            <div className="mx-auto max-w-7xl grid lg:grid-cols-2 gap-16 items-center">
+                                <div>
+                                    <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-blue-100 bg-blue-50/50 px-4 py-1.5 text-sm font-bold text-blue-700 backdrop-blur-sm">
+                                        <i data-lucide="shield-check" className="w-4 h-4"></i> Modern Technology Support
+                                    </div>
+                                    <h1 className="text-5xl font-extrabold tracking-tight text-slate-900 sm:text-7xl leading-[1.1]">
+                                        Tech help that <span className="text-blue-700 underline decoration-blue-200 underline-offset-8">actually</span> works.
+                                    </h1>
+                                    <p className="mt-8 text-xl leading-relaxed text-slate-600 max-w-xl">
+                                        Providing responsive, professional technical support for homes and small businesses in Southwest Florida. We make tech simple.
+                                    </p>
+                                    <div className="mt-10 flex flex-wrap gap-4">
+                                        <a href="#services" className="rounded-full bg-slate-900 px-8 py-4 text-base font-bold text-white shadow-xl transition hover:bg-blue-700 hover:-translate-y-1">
+                                            Explore Services
+                                        </a>
+                                        <a href="#contact" className="rounded-full border border-slate-200 bg-white px-8 py-4 text-base font-bold text-slate-900 transition hover:border-blue-700 hover:text-blue-700">
+                                            Get in Touch
+                                        </a>
+                                    </div>
+                                </div>
+                                <div className="hidden lg:block">
+                                    <div className="relative rounded-[2.5rem] border border-slate-200 bg-white p-8 shadow-2xl">
+                                        <div className="flex items-center justify-between mb-8">
+                                            <div className="font-extrabold text-lg">NextCore Dashboard</div>
+                                            <div className="flex items-center gap-2">
+                                                <div className="h-2 w-2 rounded-full bg-green-500 animate-pulse"></div>
+                                                <span className="text-xs font-bold text-slate-400 uppercase tracking-widest">Available</span>
+                                            </div>
+                                        </div>
+                                        <div className="space-y-4">
+                                            {["Network Analysis", "System Optimization", "AV Integration"].map((text) => (
+                                                <div key={text} className="h-16 rounded-2xl bg-slate-50 border border-slate-100 flex items-center px-6 gap-4">
+                                                    <div className="h-8 w-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-600">
+                                                        <i data-lucide="check" className="w-4 h-4"></i>
+                                                    </div>
+                                                    <div className="text-sm font-bold text-slate-700">{text}</div>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        {/* Services Grid */}
+                        <section id="services" className="bg-slate-50 py-32 px-6">
+                            <div className="mx-auto max-w-7xl">
+                                <div className="max-w-3xl mb-16">
+                                    <h2 className="text-sm font-black uppercase tracking-widest text-blue-600 mb-4 tracking-[0.2em]">Expertise</h2>
+                                    <h3 className="text-4xl font-extrabold text-slate-900 sm:text-5xl">Solutions for the digital home.</h3>
+                                </div>
+                                <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+                                    {services.map((service) => (
+                                        <div key={service.title} className="group rounded-[2rem] border border-slate-200 bg-white p-8 transition hover:shadow-2xl hover:-translate-y-2">
+                                            <div className={`mb-6 inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-slate-50 group-hover:bg-blue-50 transition-colors ${service.color}`}>
+                                                <i data-lucide={service.icon}></i>
+                                            </div>
+                                            <h4 className="text-xl font-extrabold text-slate-950 mb-3">{service.title}</h4>
+                                            <p className="text-slate-600 leading-relaxed text-sm">{service.description}</p>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        </section>
+
+                        {/* Contact Section */}
+                        <section id="contact" className="py-32 px-6">
+                            <div className="mx-auto max-w-7xl grid lg:grid-cols-2 gap-12">
+                                <div className="bg-slate-900 rounded-[3rem] p-12 text-white relative overflow-hidden">
+                                    <div className="absolute top-0 right-0 w-64 h-64 bg-blue-500/10 blur-[100px]"></div>
+                                    <h2 className="text-4xl font-extrabold mb-6">Let's solve your tech issues.</h2>
+                                    <p className="text-slate-400 text-lg mb-10 leading-relaxed">Serving Fort Myers, Naples, and Southwest Florida with premium on-site technical assistance.</p>
+                                    <div className="space-y-8">
+                                        <div className="flex gap-4 items-start">
+                                            <div className="bg-slate-800 p-3 rounded-2xl text-blue-400"><i data-lucide="phone" className="w-5 h-5"></i></div>
+                                            <div>
+                                                <div className="text-xs font-black text-slate-500 uppercase tracking-widest mb-1">Call or Text</div>
+                                                <div className="text-xl font-bold">(555) 555-5555</div>
+                                            </div>
+                                        </div>
+                                        <div className="flex gap-4 items-start">
+                                            <div className="bg-slate-800 p-3 rounded-2xl text-violet-400"><i data-lucide="mail" className="w-5 h-5"></i></div>
+                                            <div>
+                                                <div className="text-xs font-black text-slate-500 uppercase tracking-widest mb-1">Email Us</div>
+                                                <div className="text-xl font-bold">info@nextcoretech.com</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className="bg-white border border-slate-200 rounded-[3rem] p-12 shadow-sm">
+                                    {!formSubmitted ? (
+                                        <form className="space-y-6" onSubmit={(e) => { e.preventDefault(); setFormSubmitted(true); }}>
+                                            <div className="grid sm:grid-cols-2 gap-6">
+                                                <div className="space-y-2">
+                                                    <label className="text-xs font-black text-slate-500 uppercase tracking-widest">Full Name</label>
+                                                    <input type="text" required className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 outline-none focus:border-blue-500 transition" placeholder="John Doe" />
+                                                </div>
+                                                <div className="space-y-2">
+                                                    <label className="text-xs font-black text-slate-500 uppercase tracking-widest">Email</label>
+                                                    <input type="email" required className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 outline-none focus:border-blue-500 transition" placeholder="john@example.com" />
+                                                </div>
+                                            </div>
+                                            <div className="space-y-2">
+                                                <label className="text-xs font-black text-slate-500 uppercase tracking-widest">How can we help?</label>
+                                                <textarea rows={4} required className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 outline-none focus:border-blue-500 transition resize-none" placeholder="Describe your issue..."></textarea>
+                                            </div>
+                                            <button type="submit" className="w-full rounded-2xl bg-blue-700 py-4 text-white font-black hover:bg-slate-900 transition shadow-lg shadow-blue-100 uppercase tracking-widest text-sm">
+                                                Submit Service Request
+                                            </button>
+                                        </form>
+                                    ) : (
+                                        <div className="h-full flex flex-col items-center justify-center text-center py-12">
+                                            <div className="h-20 w-20 rounded-full bg-green-100 flex items-center justify-center mb-6">
+                                                <i data-lucide="check-circle" className="w-10 h-10 text-green-600"></i>
+                                            </div>
+                                            <h3 className="text-2xl font-extrabold mb-2">Request Received</h3>
+                                            <p className="text-slate-600 font-medium">A NextCore technician will reach out to you shortly.</p>
+                                        </div>
+                                    )}
+                                </div>
+                            </div>
+                        </section>
+                    </main>
+
+                    <footer className="border-t border-slate-100 py-12 px-6">
+                        <div className="mx-auto max-w-7xl flex flex-col md:flex-row justify-between items-center gap-6">
+                            <div className="text-slate-400 text-xs font-bold uppercase tracking-[0.2em]">© 2026 NextCore Tech Solutions LLC.</div>
+                            <div className="flex gap-8 text-xs font-black text-slate-500 uppercase tracking-widest">
+                                <a href="#about" className="hover:text-blue-600">About</a>
+                                <a href="#services" className="hover:text-blue-600">Privacy</a>
+                                <a href="#contact" className="hover:text-blue-600">Terms</a>
+                            </div>
+                        </div>
+                    </footer>
+                </div>
+            );
+        }
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+
+</html>
